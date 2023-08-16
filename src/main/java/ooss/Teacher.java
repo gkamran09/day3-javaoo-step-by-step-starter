@@ -27,6 +27,6 @@ public class Teacher extends Person {
         if (classNames.length() > 0) {
             classNames.delete(classNames.length() - 2, classNames.length()); // Remove the trailing comma and space
         }
-        return String.format(super.introduce() + " I am a teacher. I teach Classes %s", classNames);
+        return String.format(super.introduce() + " I am a teacher. I teach Class %s.", classNames);
     }
 }
