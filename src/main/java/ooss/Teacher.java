@@ -1,48 +1,55 @@
 package ooss;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Teacher extends Person {
-    private List<Klass> assignedClasses;
+
+    private Set<Klass> classes = new HashSet<>();
 
     public Teacher(int id, String name, int age) {
         super(id, name, age);
-        assignedClasses = new ArrayList<>();
-    }
-    public String getName() {
-        return super.getName();
+        this.isTeacher = true;
     }
 
+
     public void assignTo(Klass klass) {
-        assignedClasses.add(klass);
-        klass.attach(this);
+        classes.add(klass);
+        klass.attach(this); // Associate the teacher with the class
     }
 
     public boolean belongsTo(Klass klass) {
-        return assignedClasses.contains(klass);
+        return classes.contains(klass);
     }
 
     public boolean isTeaching(Student student) {
-        for (Klass klass : assignedClasses) {
-            if (student.isIn(klass)) {
+        for (Klass klass : classes) {
+            if (student.isIn(klass) && klass.isTaughtBy(this)) {
                 return true;
             }
         }
         return false;
     }
 
+    public void printLeaderMessage(Student student, Klass klass) {
+        System.out.println("I am " + getName() + ", teacher of Class " + klass.getId() +
+                ". I know " + student.getName() + " become Leader.");
+    }
 
     @Override
     public String introduce() {
-        StringBuilder classIds = new StringBuilder();
-        for (Klass klass : assignedClasses) {
-            classIds.append(klass.getId()).append(", ");
+        String introduction = super.introduce();
+        introduction += " I am a teacher.";
+
+        if (!classes.isEmpty()) {
+            String classList = classes.stream()
+                    .map(klass -> " " + klass.getId())
+                    .collect(Collectors.joining(","));
+
+            introduction += " I teach Class" + classList + ".";
         }
-        if (classIds.length() > 0) {
-            classIds.delete(classIds.length() - 2, classIds.length());
-            return super.introduce() + " I am a teacher. I teach Class " + classIds + ".";
-        } else {
-            return super.introduce() + " I am a teacher.";
-        }
+
+        return introduction;
     }
 }
+
