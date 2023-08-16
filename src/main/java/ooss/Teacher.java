@@ -3,15 +3,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Teacher extends Person {
-    private List<Klass> assignedClasses; // List of classes the teacher is assigned to
+    private List<Klass> assignedClasses;
 
     public Teacher(int id, String name, int age) {
         super(id, name, age);
         assignedClasses = new ArrayList<>();
     }
+    public String getName() {
+        return super.getName();
+    }
 
     public void assignTo(Klass klass) {
         assignedClasses.add(klass);
+        klass.attach(this);
     }
 
     public boolean belongsTo(Klass klass) {
@@ -27,15 +31,16 @@ public class Teacher extends Person {
         return false;
     }
 
+
     @Override
     public String introduce() {
-        StringBuilder classNames = new StringBuilder();
+        StringBuilder classIds = new StringBuilder();
         for (Klass klass : assignedClasses) {
-            classNames.append(klass.getId()).append(", ");
+            classIds.append(klass.getId()).append(", ");
         }
-        if (classNames.length() > 0) {
-            classNames.delete(classNames.length() - 2, classNames.length()); // Remove the trailing comma and space
+        if (classIds.length() > 0) {
+            classIds.delete(classIds.length() - 2, classIds.length());
         }
-        return String.format(super.introduce() + " I am a teacher. I teach Class %s.", classNames);
+        return super.introduce() + " I am a teacher. I teach Class " + classIds;
     }
 }

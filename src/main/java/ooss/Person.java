@@ -30,4 +30,7 @@ public class Person {
     public int hashCode() {
         return id;
     }
+    public String getName() {
+        return name;
+    }
 }

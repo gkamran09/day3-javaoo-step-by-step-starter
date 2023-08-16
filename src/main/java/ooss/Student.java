@@ -2,6 +2,7 @@ package ooss;
 
 public class Student extends Person {
     private Klass klass;
+    private boolean isLeader;
 
     public Student(int id, String name, int age) {
         super(id, name, age);
@@ -9,17 +10,26 @@ public class Student extends Person {
     public void join(Klass klass) {
         this.klass = klass;
     }
+    public String getName() {
+        return super.getName();
+    }
 
     public boolean isIn(Klass klass) {
         return this.klass != null && this.klass.equals(klass);
     }
+    public void setLeader(boolean leader) {
+        isLeader = leader;
+    }
     @Override
     public String introduce() {
-        if (klass != null && klass.getLeader() != null && klass.getLeader().equals(this)) {
-            return super.introduce() + " I am a student. I am the leader of class " + klass.getId() + ".";
-        } else {
-            return super.introduce() + " I am a student.";
+        String intro = super.introduce() + " I am a student.";
+
+        if (isLeader && klass != null && klass.getLeader() != null && klass.getLeader().equals(this)) {
+            intro += " I am the leader of class " + klass.getId() + ".";
         }
+
+        return intro;
     }
+
 
 }

@@ -3,6 +3,8 @@ package ooss;
 public class Klass {
     private int id;
     private Student leader;
+    private Teacher teacher;
+    private Student student;
 
     public Klass(int id) {
     this.id = id;
@@ -21,10 +23,14 @@ public class Klass {
         return id;
     }
     public void assignLeader(Student student) {
-        if (!student.isIn(this)) {
-            System.out.println("It is not one of us.");
+        if (student.isIn(this)) {
+            student.setLeader(true);
+            if (teacher != null) {
+                System.out.printf("I am %s, teacher of Class %d. I know %s become Leader.%n",
+                        teacher.getName(), id, student.getName());
+            }
         } else {
-            this.leader = student;
+            System.out.println("It is not one of us.");
         }
     }
     public Student getLeader() {
@@ -33,6 +39,15 @@ public class Klass {
     public boolean isLeader(Student student) {
         return leader != null && leader.equals(student);
     }
+    public void attach(Person person) {
+        if (person instanceof Teacher) {
+            this.teacher = (Teacher) person;
+        } else if (person instanceof Student) {
+            Student student = (Student) person;
+            student.join(this);
+        }
+    }
+
 
     @Override
     public int hashCode() {
