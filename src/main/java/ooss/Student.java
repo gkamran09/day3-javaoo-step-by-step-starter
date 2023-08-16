@@ -2,6 +2,7 @@ package ooss;
 
 public class Student extends Person {
     private Klass klass;
+
     public Student(int id, String name, int age) {
         super(id, name, age);
     }
@@ -14,7 +15,11 @@ public class Student extends Person {
     }
     @Override
     public String introduce() {
-        return String.format(super.introduce()+" I am a student.");
+        if (klass != null && klass.getLeader() != null && klass.getLeader().equals(this)) {
+            return super.introduce() + " I am a student. I am the leader of class " + klass.getId() + ".";
+        } else {
+            return super.introduce() + " I am a student.";
+        }
     }
 
 }

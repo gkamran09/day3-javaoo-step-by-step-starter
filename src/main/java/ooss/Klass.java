@@ -2,6 +2,8 @@ package ooss;
 
 public class Klass {
     private int id;
+    private Student leader;
+
     public Klass(int id) {
     this.id = id;
     }
@@ -17,6 +19,12 @@ public class Klass {
     }
     public int getId() {
         return id;
+    }
+    public void assignLeader(Student student) {
+        this.leader = student;
+    }
+    public Student getLeader() {
+        return leader;
     }
 
     @Override
