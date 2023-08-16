@@ -36,6 +36,7 @@ public class Klass {
     public Student getLeader() {
         return leader;
     }
+
     public boolean isLeader(Student student) {
         return leader != null && leader.equals(student);
     }

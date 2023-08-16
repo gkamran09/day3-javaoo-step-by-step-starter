@@ -24,8 +24,8 @@ public class Student extends Person {
     public String introduce() {
         String intro = super.introduce() + " I am a student.";
 
-        if (isLeader && klass != null && klass.getLeader() != null && klass.getLeader().equals(this)) {
-            intro += " I am the leader of class " + klass.getId() + ".";
+        if (klass != null) {
+            intro += " I am in class " + klass.getId() + ".";
         }
 
         return intro;
