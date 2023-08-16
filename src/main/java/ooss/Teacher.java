@@ -1,23 +1,32 @@
 package ooss;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Teacher extends Person {
-    private Klass klass;
+    private List<Klass> assignedClasses; // List of classes the teacher is assigned to
+
     public Teacher(int id, String name, int age) {
         super(id, name, age);
+        assignedClasses = new ArrayList<>();
     }
+
     public void assignTo(Klass klass) {
-        this.klass = klass;
+        assignedClasses.add(klass);
     }
 
     public boolean belongsTo(Klass klass) {
-        return this.klass != null && this.klass.equals(klass);
+        return assignedClasses.contains(klass);
     }
+
+    @Override
     public String introduce() {
-        return String.format(super.introduce()+" I am a teacher.");
+        StringBuilder classNames = new StringBuilder();
+        for (Klass klass : assignedClasses) {
+            classNames.append(klass.getId()).append(", ");
+        }
+        if (classNames.length() > 0) {
+            classNames.delete(classNames.length() - 2, classNames.length()); // Remove the trailing comma and space
+        }
+        return String.format(super.introduce() + " I am a teacher. I teach Classes %s", classNames);
     }
 }

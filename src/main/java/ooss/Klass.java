@@ -15,6 +15,9 @@ public class Klass {
 
         return id == klass.id;
     }
+    public int getId() {
+        return id;
+    }
 
     @Override
     public int hashCode() {
