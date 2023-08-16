@@ -18,6 +18,15 @@ public class Teacher extends Person {
         return assignedClasses.contains(klass);
     }
 
+    public boolean isTeaching(Student student) {
+        for (Klass klass : assignedClasses) {
+            if (student.isIn(klass)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public String introduce() {
         StringBuilder classNames = new StringBuilder();
