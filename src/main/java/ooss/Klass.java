@@ -25,6 +25,7 @@ public class Klass {
     public void assignLeader(Student student) {
         if (student.isIn(this)) {
             student.setLeader(true);
+            this.leader = student;
             if (teacher != null) {
                 System.out.printf("I am %s, teacher of Class %d. I know %s become Leader.%n",
                         teacher.getName(), id, student.getName());
@@ -38,7 +39,7 @@ public class Klass {
     }
 
     public boolean isLeader(Student student) {
-        return leader != null && leader.equals(student);
+        return leader != null && student != null && leader.getId() == student.getId();
     }
     public void attach(Person person) {
         if (person instanceof Teacher) {
