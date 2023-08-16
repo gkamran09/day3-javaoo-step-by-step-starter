@@ -21,7 +21,11 @@ public class Klass {
         return id;
     }
     public void assignLeader(Student student) {
-        this.leader = student;
+        if (!student.isIn(this)) {
+            System.out.println("It is not one of us.");
+        } else {
+            this.leader = student;
+        }
     }
     public Student getLeader() {
         return leader;
