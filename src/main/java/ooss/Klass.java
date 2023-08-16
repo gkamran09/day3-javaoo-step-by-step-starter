@@ -29,6 +29,9 @@ public class Klass {
             if (teacher != null) {
                 System.out.printf("I am %s, teacher of Class %d. I know %s become Leader.%n",
                         teacher.getName(), id, student.getName());
+            } else {
+                System.out.printf("I am %s, student of Class %d. I know %s become Leader.%n",
+                        student.getName(), id, student.getName());
             }
         } else {
             System.out.println("It is not one of us.");
@@ -39,7 +42,7 @@ public class Klass {
     }
 
     public boolean isLeader(Student student) {
-        return leader != null && student != null && leader.getId() == student.getId();
+        return leader != null && leader.equals(student);
     }
     public void attach(Person person) {
         if (person instanceof Teacher) {
@@ -47,6 +50,9 @@ public class Klass {
         } else if (person instanceof Student) {
             Student student = (Student) person;
             student.join(this);
+            if (student.isLeader()) {
+                this.leader = student;
+            }
         }
     }
 

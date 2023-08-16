@@ -20,11 +20,20 @@ public class Student extends Person {
     public void setLeader(boolean leader) {
         isLeader = leader;
     }
+    public boolean isLeader() {
+        return isLeader;
+    }
+    public void assignLeader() {
+        if (klass != null) {
+            klass.assignLeader(this);
+        }
+    }
+
     @Override
     public String introduce() {
         String intro = super.introduce() + " I am a student.";
 
-        if (isLeader && klass != null && klass.getLeader() != null && klass.getLeader().equals(this)) {
+        if (isLeader && klass != null && klass.isLeader(this)) {
             intro += " I am the leader of class " + klass.getId() + ".";
         } else if (klass != null) {
             intro += " I am in class " + klass.getId() + ".";
