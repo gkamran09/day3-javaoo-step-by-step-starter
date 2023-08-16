@@ -40,7 +40,9 @@ public class Teacher extends Person {
         }
         if (classIds.length() > 0) {
             classIds.delete(classIds.length() - 2, classIds.length());
+            return super.introduce() + " I am a teacher. I teach Class " + classIds + ".";
+        } else {
+            return super.introduce() + " I am a teacher.";
         }
-        return super.introduce() + " I am a teacher. I teach Class " + classIds;
     }
 }
